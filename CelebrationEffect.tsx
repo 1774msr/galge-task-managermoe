@@ -1,5 +1,5 @@
-﻿import React from 'react';
-import { Heart } from 'lucide-react';
+import React from "react";
+import { Heart } from "lucide-react";
 
 interface Particle {
   id: number;
@@ -15,9 +15,9 @@ export default function CelebrationEffect({ particles }: { particles: Particle[]
           key={item.id} 
           className="absolute animate-float-up" 
           style={{ 
-            left: \\%\, 
-            bottom: '-10%', 
-            animationDelay: \\s\ 
+            left: item.x + "%", 
+            bottom: "-10%", 
+            animationDelay: item.delay + "s" 
           }}
         >
           <Heart className="w-8 h-8 text-pink-400" fill="currentColor" />
