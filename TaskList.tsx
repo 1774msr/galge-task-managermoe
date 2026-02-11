@@ -1,20 +1,40 @@
-﻿'use client';
-import { Task } from '@/types/task';
-import TaskItem from './TaskItem';
+import React from "react";
+import TaskItem from "./TaskItem";
+
+interface Task {
+  id: string;
+  title: string;
+  description: string;
+  priority: "high" | "medium" | "low";
+  completed: boolean;
+}
+
 interface TaskListProps {
   tasks: Task[];
-  onToggleTask: (id: string) => void;
-  onDeleteTask: (id: string) => void;
+  onToggle: (id: string) => void;
+  onDelete: (id: string) => void;
 }
-export default function TaskList({ tasks, onToggleTask, onDeleteTask }: TaskListProps) {
+
+export default function TaskList({ tasks, onToggle, onDelete }: TaskListProps) {
   if (tasks.length === 0) {
     return (
-      <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-16 text-center">
-        <div className="text-6xl mb-4 opacity-30">📝</div>
-        <p className="text-xl text-gray-400 font-medium">タスクがありません</p>
-        <p className="text-gray-400 mt-2">上から新しいタスクを追加してください</p>
+      <div className="text-center py-12 bg-white/50 rounded-2xl border-2 border-dashed border-pink-200">
+        <p className="text-gray-400 font-medium">現在、攻略対象のタスクはありません。</p>
       </div>
     );
   }
-  return (<div className="space-y-3">{tasks.map((task, index) => (<TaskItem key={task.id} task={task} index={index} onToggle={() => onToggleTask(task.id)} onDelete={() => onDeleteTask(task.id)} />))}</div>);
+
+  return (
+    <div className="space-y-3">
+      {tasks.map((task, index) => (
+        <TaskItem 
+          key={task.id} 
+          task={task} 
+          index={index} 
+          onToggle={() => onToggle(task.id)} 
+          onDelete={() => onDelete(task.id)} 
+        />
+      ))}
+    </div>
+  );
 }
